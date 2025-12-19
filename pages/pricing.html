@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing — RemoteProJobs</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../styles/upwork.css" />
+  <link rel="stylesheet" href="../styles/notifications.css" />
+  <link rel="stylesheet" href="../styles/pricing.css" />
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <div class="logo">
+        <h1><i class="fas fa-briefcase"></i> RemoteProJobs</h1>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+      <nav>
+        <ul>
+          <li><a href="./work.html">Earn</a></li>
+          <li><a href="./companies.html">Companies</a></li>
+          <li><a href="./resources.html">Resources</a></li>
+          <li><a href="./contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="auth-buttons">
+        <a href="./profile.html" class="profile-icon"><i class="fas fa-user"></i></a>
+        <div class="notification-wrapper">
+          <a href="./notifications.html" class="notification-icon" id="notificationBell">
+            <i class="fas fa-bell"></i>
+            <span class="notification-count" id="notificationCount">0</span>
+          </a>
+        </div>
+        <button class="btn btn-outline btn-sm logout-btn" id="logoutBtn">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="toast" class="toast"></div>
+
+  <!-- CURRENCY SELECTION FIRST (Forced every time on load) -->
+  <div id="currencyOverlay" class="currency-overlay">
+    <div class="currency-box">
+      <i class="fas fa-globe"></i>
+      <h2>Select Your Currency</h2>
+      <p>Please choose your preferred currency to continue:</p>
+      <select id="currencySelect">
+        <option value="USD">USD - US Dollar</option>
+        <option value="NGN">NGN - Nigerian Naira</option>
+        <option value="GHS">GHS - Ghanaian Cedi</option>
+        <option value="KES">KES - Kenyan Shilling</option>
+        <option value="ZAR">ZAR - South African Rand</option>
+        <option value="INR">INR - Indian Rupee</option>
+        <option value="EUR">EUR - Euro</option>
+        <option value="GBP">GBP - British Pound</option>
+        <option value="CAD">CAD - Canadian Dollar</option>
+        <option value="AUD">AUD - Australian Dollar</option>
+      </select>
+      <button id="continueBtn" class="btn btn-primary btn-full">Continue</button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT (Hidden until currency selected) -->
+  <main class="pricing-main" id="mainContent" style="display:none;">
+    <div class="container">
+      <div class="pricing-card">
+
+        <div class="pricing-header">
+          <div class="avatar"><i class="fas fa-gem"></i></div>
+          <h2 class="if-not-verified">Get Verified</h2>
+          <h2 class="if-verified">Add Connects</h2>
+          <p class="if-not-verified">Get verified & unlock premium job applications instantly</p>
+          <p class="if-verified">Add connects for more options or chances</p>
+        </div>
+
+        <div class="price-display">
+          <span class="currency-flag" id="currencyFlag">USD</span>
+          <span class="price-amount" id="priceAmount">$10.40</span>
+          <span class="price-label">Get Connects to unlock more job opportunities</span>
+        </div>
+
+        <!-- Benefits (Dynamic) -->
+        <div class="info-section if-not-verified" style="display:none;">
+          <div class="info-row"><i class="fas fa-check-circle"></i> Instant Account Verification</div>
+          <div class="info-row"><i class="fas fa-rocket"></i> Priority Job Applications</div>
+          <div class="info-row"><i class="fas fa-users"></i> Access Top USA Clients</div>
+          <div class="info-row"><i class="fas fa-star"></i> Stand Out to Employers</div>
+          <div class="info-row"><i class="fas fa-headset"></i> 24/7 Dedicated Support</div>
+        </div>
+
+        <div class="info-section if-verified" style="display:none;">
+          <div class="info-row"><i class="fas fa-check-circle"></i> Your Account is Verified</div>
+          <div class="info-row"><i class="fas fa-bolt"></i> Add More Connects</div>
+          <div class="info-row"><i class="fas fa-rocket"></i> Unlock More Job Opportunities</div>
+          <div class="info-row"><i class="fas fa-users"></i> Apply to Premium Listings</div>
+          <div class="info-row"><i class="fas fa-headset"></i> 24/7 Dedicated Support</div>
+        </div>
+
+        <!-- Professional Notice -->
+        <div class="system-notice">
+          <i class="fas fa-info-circle"></i>
+          <div class="notice-text">
+            <strong>Automated Payments Temporarily Unavailable</strong><br><br>
+            Our payment gateway is currently under scheduled maintenance.<br>
+            To get your Connects Token <strong>instantly</strong>, please contact our Support Team.<br><br>
+            We have dedicated agents in <strong>Nigeria, Ghana, Kenya, South Africa, and India</strong> ready to activate your account in under 5 minutes.
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="profile-actions">
+          <button class="btn btn-success btn-full" id="contactBtn">
+            <i class="fas fa-phone"></i> Contact Support Team for Connects
+          </button>
+          <button class="btn btn-outline btn-full" id="changeCurrencyBtn">
+            <i class="fas fa-exchange-alt"></i> Change Currency
+          </button>
+        </div>
+
+        <p class="footer-note">Trusted by over 15,000 freelancers across Africa & worldwide</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 RemoteProJobs. All rights reserved.</p>
+    </div>
+  </footer>
+<script src="../scripts/nav.js"></script>
+  <script src="../scripts/userStatus.js"></script>
+  <script src="../scripts/pricing.js"></script>
+  <script src="../scripts/notifications.js"></script>
+   <script src="../scripts/notificationBell.js"></script>
+</body>
+</html>
