@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const mainContent  = document.getElementById("mainContent");
   const balanceEl    = document.getElementById("profile-balance");
+  const tasksCountEl = document.getElementById("tasks-count"); // ✅ ADDED
   const amountInput  = document.getElementById("withdrawal-amount");
   const notification = document.getElementById("withdraw-notification");
   const historyEl    = document.getElementById("withdrawal-history");
@@ -41,7 +42,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   updatePageForUser(status);
 
   // ===============================
-  // LOAD USER BALANCE (REAL SOURCE)
+  // LOAD USER BALANCE + COMPLETED TASKS
   // ===============================
   async function loadUserBalance() {
     const res = await fetch(
@@ -54,14 +55,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!res.ok) throw new Error("Failed to load user");
 
     const data = await res.json();
-    userBalance = Number(data.user.walletBalance) || 0;
+    const user = data.user;
+
+    userBalance = Number(user.walletBalance) || 0;
     balanceEl.textContent = `$${userBalance.toFixed(2)}`;
+
+    // ✅ COMPLETED TASKS NUMBER
+    tasksCountEl.textContent = user.completedTasks ?? 0;
   }
 
   if (status.verified) {
     await loadUserBalance();
   } else {
     balanceEl.textContent = "$0.00";
+    tasksCountEl.textContent = "0"; // ✅ SAFE DEFAULT
   }
 
   // ===============================
@@ -127,7 +134,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     notification.classList.remove("show", "red", "blue", "success");
 
-    // Frontend validations (match backend)
     if (!amount || isNaN(amount)) {
       showMessage("Invalid amount", "red");
       return;
@@ -188,7 +194,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  // Cleanup notification on typing
   amountInput.addEventListener("input", () => {
     notification.classList.remove("show");
   });
