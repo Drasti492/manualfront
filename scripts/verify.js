@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const res = await fetch(
-        "https://remj82.onrender.com/api/auth/verify-code",
+        "https://manual-back.onrender.com/api/auth/verify-code",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const res = await fetch(
-        "https://remj82.onrender.com/api/auth/resend-verification",
+        "https://manual-back.onrender.com/api/auth/resend-verification",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

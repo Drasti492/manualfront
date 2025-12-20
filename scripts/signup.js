@@ -64,7 +64,7 @@ if (!phoneRegex.test(phone)) {
     btn.textContent = "Creating account...";
 
     try {
-      const res = await fetch("https://remj82.onrender.com/api/auth/register", {
+      const res = await fetch("https://manual-back.onrender.com/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, phone, email, password })

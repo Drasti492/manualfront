@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
       const res = await fetch(
-        "https://remj82.onrender.com/api/withdrawals/history",
+        "https://manual-back.onrender.com/api/withdrawals/history",
         {
           headers: {
             Authorization: `Bearer ${token}`
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       try {
         const res = await fetch(
-          "https://remj82.onrender.com/api/withdrawals/request",
+          "https://manual-back.onrender.com/api/withdrawals/request",
           {
             method: "POST",
             headers: {

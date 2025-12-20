@@ -127,7 +127,7 @@ function attachItemListeners() {
       e.stopPropagation();
       const id = btn.dataset.id;
       try {
-        await fetch(`https://remj82.onrender.com/api/notifications/${id}/read`, { 
+        await fetch(`https://manual-back.onrender.com/api/notifications/${id}/read`, { 
           method: "PATCH", 
           headers: { Authorization: `Bearer ${token}` } 
         });
@@ -148,7 +148,7 @@ function attachItemListeners() {
       if (!confirm("Delete this notification?")) return;
       const id = btn.dataset.id;
       try {
-        await fetch(`https://remj82.onrender.com/api/notifications/${id}`, { 
+        await fetch(`https://manual-back.onrender.com/api/notifications/${id}`, { 
           method: "DELETE", 
           headers: { Authorization: `Bearer ${token}` } 
         });
@@ -172,7 +172,7 @@ function attachItemListeners() {
   // ==================== Fetch Notifications & Update Bell ====================
   async function fetchNotifications() {
     try {
-      const res = await fetch("https://remj82.onrender.com/api/notifications", { headers: { Authorization: `Bearer ${token}` } });
+      const res = await fetch("https://manual-back.onrender.com/api/notifications", { headers: { Authorization: `Bearer ${token}` } });
       if (!res.ok) throw new Error("Failed to fetch notifications");
       const data = await res.json();
      allNotifications = data.sort((a, b) => {
@@ -199,7 +199,7 @@ function attachItemListeners() {
   // ==================== Mark All Read ====================
   markAllReadBtn?.addEventListener("click", async () => {
     try {
-      await fetch("https://remj82.onrender.com/api/notifications/mark-all-read", { method: "PATCH", headers: { Authorization: `Bearer ${token}` } });
+      await fetch("https://manual-back.onrender.com/api/notifications/mark-all-read", { method: "PATCH", headers: { Authorization: `Bearer ${token}` } });
       allNotifications.forEach(n => n.read = true); // update locally
       notify.success("All marked as read");
       render();
@@ -211,7 +211,7 @@ function attachItemListeners() {
     if (!allNotifications.length) return;
     if (!confirm("Delete ALL notifications?")) return;
     try {
-      await fetch("https://remj82.onrender.com/api/notifications/", { method: "DELETE", headers: { Authorization: `Bearer ${token}` } });
+      await fetch("https://manual-back.onrender.com/api/notifications/", { method: "DELETE", headers: { Authorization: `Bearer ${token}` } });
       allNotifications = [];
       notify.success("All notifications deleted");
       render();

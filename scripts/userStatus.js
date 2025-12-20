@@ -5,7 +5,7 @@ async function getUserStatus() {
   if (!token) return { loggedIn: false };
 
   try {
-    const res = await fetch("https://remj82.onrender.com/api/auth/user", {
+    const res = await fetch("https://manual-back.onrender.com/api/auth/user", {
       headers: { Authorization: `Bearer ${token}` }
     });
 

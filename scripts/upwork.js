@@ -1042,7 +1042,7 @@ async function applyJob(job) {
     // Fetch user profile
     let user;
     try {
-        const res = await fetch("https://remj82.onrender.com/api/auth/user", {
+        const res = await fetch("https://manual-back.onrender.com/api/auth/user", {
             headers: { Authorization: `Bearer ${token}` }
         });
         if (!res.ok) throw new Error("Failed to fetch user");
@@ -1069,7 +1069,7 @@ async function applyJob(job) {
 
     // Apply job request
     try {
-        const res = await fetch(`https://remj82.onrender.com/api/applications/apply/${String(job.id)}`, {
+        const res = await fetch(`https://manual-back.onrender.com/api/applications/apply/${String(job.id)}`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,

@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.textContent = "Logging in...";
 
     try {
-      const res = await fetch("https://remj82.onrender.com/api/auth/login", {
+      const res = await fetch("https://manual-back.onrender.com/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password })

@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showMessage('Resetting password...', 'success');
 
         try {
-            const response = await fetch('https://remj82.onrender.com/api/auth/reset-password', {
+            const response = await fetch('https://manual-back.onrender.com/api/auth/reset-password', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, code: resetCode, newPassword })

@@ -12,7 +12,7 @@
 
   async function updateCount() {
     try {
-      const res = await fetch("https://remj82.onrender.com/api/notifications", {
+      const res = await fetch("https://manual-back.onrender.com/api/notifications", {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -33,7 +33,7 @@
   bell.addEventListener("click", async (e) => {
     e.preventDefault();
     try {
-      await fetch("https://remj82.onrender.com/api/notifications/mark-all-read", {
+      await fetch("https://manual-back.onrender.com/api/notifications/mark-all-read", {
         method: "PATCH",
         headers: { Authorization: `Bearer ${token}` }
       });
