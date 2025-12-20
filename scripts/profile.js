@@ -51,8 +51,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     els.email.textContent = u.email;
     els.email2.textContent = u.email;
     els.phone.textContent = u.phone || "Not added";
-
-    els.balance.textContent = `$${(u.balance || 0).toFixed(2)}`;
+    els.balance.textContent = `$${(u.walletBalance || 0).toFixed(2)}`;
     els.connects.textContent = u.connects ?? 0;
     els.applications.textContent = u.applications?.length ?? 0;
 
