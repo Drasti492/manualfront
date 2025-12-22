@@ -1,4 +1,4 @@
-// scripts/pricing.js — FINAL, FULL, PAYHERO-ENABLED (NO REDUCTION)
+// scripts/pricing.js — FINAL, FULL, PAYHERO-ENABLED (FIXED)
 
 document.addEventListener("DOMContentLoaded", async () => {
   const PRICE_IN_USD = 10.40;
@@ -10,11 +10,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   const select = document.getElementById("currencySelect");
   const continueBtn = document.getElementById("continueBtn");
   const changeBtn = document.getElementById("changeCurrencyBtn");
-
-  // 🔁 REPLACED ACTION BUTTON
   const contactBtn = document.getElementById("contactBtn");
 
-  // 🔹 PayHero UI elements (added, not renamed)
   const phoneInput = document.getElementById("payheroPhone");
   const paymentMessage = document.getElementById("paymentMessage");
 
@@ -47,9 +44,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       .forEach(el => (el.style.display = "block"));
   }
 
-  // ===============================
-  // LOAD EXCHANGE RATES
-  // ===============================
   async function loadRatesAndUpdate(currency) {
     try {
       const res = await fetch(API_URL);
@@ -61,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       priceEl.textContent = formatCurrency(amount, currency);
       flagEl.textContent = getFlag(currency);
-    } catch (err) {
+    } catch {
       priceEl.textContent = "$10.40";
       flagEl.textContent = "USD";
     }
@@ -80,7 +74,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   // ===============================
-  // PAYHERO STK PUSH (KES)
+  // PAYHERO STK PUSH (SECURE)
   // ===============================
   contactBtn.addEventListener("click", async () => {
     const phone = phoneInput.value.trim();
@@ -93,9 +87,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    if (!phone || phone.length < 9) {
+    if (!phone || phone.length < 10) {
       paymentMessage.textContent =
-        "Enter a valid M-Pesa phone number (2547XXXXXXXX)";
+        "Enter phone in format 2547XXXXXXXX";
       return;
     }
 
@@ -123,10 +117,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       paymentMessage.textContent =
-        "STK prompt sent. Please confirm payment on your phone.";
-    } catch (err) {
+        "STK prompt sent. Confirm on your phone.";
+    } catch {
       paymentMessage.textContent =
-        "Network error. Please try again shortly.";
+        "Network error. Try again.";
     }
   });
 
