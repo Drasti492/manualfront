@@ -1,7 +1,7 @@
-// scripts/pricing.js — FINAL, FULL, PAYHERO-ENABLED (FIXED)
+// scripts/pricing.js — FIXED FOR DYNAMIC KES AMOUNT & BETTER VALIDATION
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const PRICE_IN_USD = 10.40;
+  const PRICE_IN_USD = 11.94;
 
   const priceEl = document.getElementById("priceAmount");
   const flagEl = document.getElementById("currencyFlag");
@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.min.json";
 
   let rates = {};
+  let amountKES = 0;  // FIXED: Store calculated KES for backend
 
   overlay.style.display = "flex";
   mainContent.style.display = "none";
@@ -53,11 +54,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       const rate = rates[currency.toLowerCase()] || 1;
       const amount = (PRICE_IN_USD * rate).toFixed(2);
 
+      // FIXED: Calculate KES equivalent (using USD to KES rate)
+      const kesRate = rates.kes || 129;  // Fallback if API fails; update based on current rates
+      amountKES = Math.ceil(PRICE_IN_USD * kesRate);  // Round up to whole KES
+
       priceEl.textContent = formatCurrency(amount, currency);
       flagEl.textContent = getFlag(currency);
     } catch {
-      priceEl.textContent = "$10.40";
+      priceEl.textContent = "$11.94";
       flagEl.textContent = "USD";
+      amountKES = 1540;  // Fallback fixed
     }
   }
 
@@ -77,7 +83,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // PAYHERO STK PUSH (SECURE)
   // ===============================
   contactBtn.addEventListener("click", async () => {
-    const phone = phoneInput.value.trim();
+    let phone = phoneInput.value.trim();
     const token = localStorage.getItem("token");
 
     paymentMessage.textContent = "";
@@ -87,12 +93,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    if (!phone || phone.length < 10) {
-      paymentMessage.textContent =
-        "Enter phone in format 2547XXXXXXXX";
+    // FIXED: Better phone validation (must start with 254, 12 digits total)
+    if (!phone.startsWith("254") || phone.length !== 12 || isNaN(phone)) {
+      paymentMessage.textContent = "Enter valid phone: 2547XXXXXXXX (12 digits)";
       return;
     }
 
+    contactBtn.disabled = true;  // FIXED: Disable button during request
     paymentMessage.textContent = "Sending STK prompt…";
 
     try {
@@ -104,23 +111,23 @@ document.addEventListener("DOMContentLoaded", async () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
           },
-          body: JSON.stringify({ phone })
+          body: JSON.stringify({ phone, amountKES })  // FIXED: Pass calculated amountKES
         }
       );
 
       const data = await res.json();
 
       if (!res.ok) {
-        paymentMessage.textContent =
-          data.message || "Payment initiation failed";
+        paymentMessage.textContent = data.message || "Payment initiation failed";
+        contactBtn.disabled = false;
         return;
       }
 
-      paymentMessage.textContent =
-        "STK prompt sent. Confirm on your phone.";
+      paymentMessage.textContent = "STK prompt sent. Confirm on your phone.";
     } catch {
-      paymentMessage.textContent =
-        "Network error. Try again.";
+      paymentMessage.textContent = "Network error. Try again.";
+    } finally {
+      contactBtn.disabled = false;  // Re-enable
     }
   });
 
