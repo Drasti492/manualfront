@@ -1,6 +1,8 @@
-// scripts/pricing.js — FINAL, CLEAN & ZERO ERRORS
+// scripts/pricing.js — FINAL, FULL, PAYHERO-ENABLED (NO REDUCTION)
+
 document.addEventListener("DOMContentLoaded", async () => {
   const PRICE_IN_USD = 10.40;
+
   const priceEl = document.getElementById("priceAmount");
   const flagEl = document.getElementById("currencyFlag");
   const overlay = document.getElementById("currencyOverlay");
@@ -8,34 +10,46 @@ document.addEventListener("DOMContentLoaded", async () => {
   const select = document.getElementById("currencySelect");
   const continueBtn = document.getElementById("continueBtn");
   const changeBtn = document.getElementById("changeCurrencyBtn");
+
+  // 🔁 REPLACED ACTION BUTTON
   const contactBtn = document.getElementById("contactBtn");
 
-  const API_URL = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.min.json";
+  // 🔹 PayHero UI elements (added, not renamed)
+  const phoneInput = document.getElementById("payheroPhone");
+  const paymentMessage = document.getElementById("paymentMessage");
+
+  const API_URL =
+    "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.min.json";
 
   let rates = {};
 
-  // Force currency prompt every time on page load (no auto-skip)
   overlay.style.display = "flex";
   mainContent.style.display = "none";
 
-  // Load saved currency as default in select if exists
   const savedCurrency = localStorage.getItem("userCurrency");
   if (savedCurrency) {
     select.value = savedCurrency;
   }
 
-  // Get user status (no flash - hide all dynamic parts first)
-  document.querySelectorAll(".if-verified, .if-not-verified").forEach(el => el.style.display = "none");
+  document
+    .querySelectorAll(".if-verified, .if-not-verified")
+    .forEach(el => (el.style.display = "none"));
 
   const status = await getUserStatus();
 
   if (status.verified) {
-    document.querySelectorAll(".if-verified").forEach(el => el.style.display = "block");
+    document
+      .querySelectorAll(".if-verified")
+      .forEach(el => (el.style.display = "block"));
   } else {
-    document.querySelectorAll(".if-not-verified").forEach(el => el.style.display = "block");
+    document
+      .querySelectorAll(".if-not-verified")
+      .forEach(el => (el.style.display = "block"));
   }
 
-  // Load exchange rates
+  // ===============================
+  // LOAD EXCHANGE RATES
+  // ===============================
   async function loadRatesAndUpdate(currency) {
     try {
       const res = await fetch(API_URL);
@@ -46,14 +60,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       const amount = (PRICE_IN_USD * rate).toFixed(2);
 
       priceEl.textContent = formatCurrency(amount, currency);
-      flagEl.textContent  = getFlag(currency);
+      flagEl.textContent = getFlag(currency);
     } catch (err) {
       priceEl.textContent = "$10.40";
       flagEl.textContent = "USD";
     }
   }
 
-  // Continue button
   continueBtn.addEventListener("click", () => {
     const currency = select.value;
     localStorage.setItem("userCurrency", currency);
@@ -62,42 +75,94 @@ document.addEventListener("DOMContentLoaded", async () => {
     loadRatesAndUpdate(currency);
   });
 
-  // Change currency button
   changeBtn.addEventListener("click", () => {
     overlay.style.display = "flex";
   });
 
-  // Contact button → Dynamic message based on verification
-  contactBtn.addEventListener("click", () => {
-    const phone = "19155032586"; // Your number without +
-    const currency = select.value || "USD";
-    const amount = priceEl.textContent.trim() || "$10.40";
+  // ===============================
+  // PAYHERO STK PUSH (KES)
+  // ===============================
+  contactBtn.addEventListener("click", async () => {
+    const phone = phoneInput.value.trim();
+    const token = localStorage.getItem("token");
 
-    let message;
-    if (status.verified) {
-      message = encodeURIComponent(
-        `Hello Remote ProJobs support team, I need to add more connects for ${amount} (${currency}).`
-      );
-    } else {
-      message = encodeURIComponent(
-        "Hello Remote ProJobs Support! I need to purchase Connects Token / Get Verified. Please help me activate my account instantly."
-      );
+    paymentMessage.textContent = "";
+
+    if (!token) {
+      paymentMessage.textContent = "Please login first.";
+      return;
     }
 
-    window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+    if (!phone || phone.length < 9) {
+      paymentMessage.textContent =
+        "Enter a valid M-Pesa phone number (2547XXXXXXXX)";
+      return;
+    }
+
+    paymentMessage.textContent = "Sending STK prompt…";
+
+    try {
+      const res = await fetch(
+        "https://manual-back.onrender.com/api/payhero/stk-push",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({ phone })
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        paymentMessage.textContent =
+          data.message || "Payment initiation failed";
+        return;
+      }
+
+      paymentMessage.textContent =
+        "STK prompt sent. Please confirm payment on your phone.";
+    } catch (err) {
+      paymentMessage.textContent =
+        "Network error. Please try again shortly.";
+    }
   });
 
   function getFlag(code) {
-    const flags = { USD:"USD", NGN:"NGN", GHS:"GHS", KES:"KES", ZAR:"ZAR", INR:"INR", EUR:"EUR", GBP:"GBP", CAD:"CAD", AUD:"AUD" };
+    const flags = {
+      USD: "USD",
+      NGN: "NGN",
+      GHS: "GHS",
+      KES: "KES",
+      ZAR: "ZAR",
+      INR: "INR",
+      EUR: "EUR",
+      GBP: "GBP",
+      CAD: "CAD",
+      AUD: "AUD"
+    };
     return flags[code] || "USD";
   }
 
   function formatCurrency(amount, currency) {
     const symbols = {
-      USD:"$", EUR:"€", GBP:"£", NGN:"₦", INR:"₹",
-      GHS:"GH₵", KES:"KSh", ZAR:"R", CAD:"$", AUD:"A$"
+      USD: "$",
+      EUR: "€",
+      GBP: "£",
+      NGN: "₦",
+      INR: "₹",
+      GHS: "GH₵",
+      KES: "KSh",
+      ZAR: "R",
+      CAD: "$",
+      AUD: "A$"
     };
+
     const symbol = symbols[currency] || "$";
-    return `${symbol}${parseFloat(amount).toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+    return `${symbol}${parseFloat(amount).toLocaleString(undefined, {
+      minimumFractionDigits: 2
+    })}`;
   }
 });
