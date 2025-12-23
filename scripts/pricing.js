@@ -1,6 +1,4 @@
-// scripts/pricing.js — FIXED FOR DYNAMIC KES AMOUNT & BETTER VALIDATION
-
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
   const PRICE_IN_USD = 11.94;
 
   const priceEl = document.getElementById("priceAmount");
@@ -11,159 +9,167 @@ document.addEventListener("DOMContentLoaded", async () => {
   const continueBtn = document.getElementById("continueBtn");
   const changeBtn = document.getElementById("changeCurrencyBtn");
   const contactBtn = document.getElementById("contactBtn");
-
   const phoneInput = document.getElementById("payheroPhone");
   const paymentMessage = document.getElementById("paymentMessage");
 
-  const API_URL =
-    "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.min.json";
+  const modal = document.getElementById("paymentModal");
+  const loadingState = document.querySelector(".loading-state");
+  const successState = document.querySelector(".success-state");
+  const errorState = document.querySelector(".error-state");
 
-  let rates = {};
-  let amountKES = 0;  // FIXED: Store calculated KES for backend
+  const API_URL = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.min.json";
+
+  let amountKES = 0;
 
   overlay.style.display = "flex";
   mainContent.style.display = "none";
 
   const savedCurrency = localStorage.getItem("userCurrency");
-  if (savedCurrency) {
-    select.value = savedCurrency;
-  }
+  if (savedCurrency) select.value = savedCurrency;
 
-  document
-    .querySelectorAll(".if-verified, .if-not-verified")
-    .forEach(el => (el.style.display = "none"));
+  (async () => {
+    document.querySelectorAll(".if-verified, .if-not-verified").forEach(el => el.style.display = "none");
+    try {
+      const status = await getUserStatus();
+      document.querySelectorAll(status.verified ? ".if-verified" : ".if-not-verified")
+        .forEach(el => el.style.display = "block");
+    } catch {
+      document.querySelectorAll(".if-not-verified").forEach(el => el.style.display = "block");
+    }
+  })();
 
-  const status = await getUserStatus();
-
-  if (status.verified) {
-    document
-      .querySelectorAll(".if-verified")
-      .forEach(el => (el.style.display = "block"));
-  } else {
-    document
-      .querySelectorAll(".if-not-verified")
-      .forEach(el => (el.style.display = "block"));
-  }
-
-  async function loadRatesAndUpdate(currency) {
+  async function loadRates(currency) {
     try {
       const res = await fetch(API_URL);
       const data = await res.json();
-      rates = data.usd;
-
-      const rate = rates[currency.toLowerCase()] || 1;
-      const amount = (PRICE_IN_USD * rate).toFixed(2);
-
-      // FIXED: Calculate KES equivalent (using USD to KES rate)
-      const kesRate = rates.kes || 129;  // Fallback if API fails; update based on current rates
-      amountKES = Math.ceil(PRICE_IN_USD * kesRate);  // Round up to whole KES
-
-      priceEl.textContent = formatCurrency(amount, currency);
-      flagEl.textContent = getFlag(currency);
+      const rate = data.usd[currency.toLowerCase()] || 1;
+      const kesRate = data.usd.kes || 129;
+      priceEl.textContent = formatCurrency(PRICE_IN_USD * rate, currency);
+      flagEl.textContent = currency;
+      amountKES = Math.ceil(PRICE_IN_USD * kesRate);
     } catch {
       priceEl.textContent = "$11.94";
       flagEl.textContent = "USD";
-      amountKES = 1540;  // Fallback fixed
+      amountKES = 1540;
     }
   }
 
-  continueBtn.addEventListener("click", () => {
-    const currency = select.value;
-    localStorage.setItem("userCurrency", currency);
+  continueBtn.addEventListener("click", async () => {
+    localStorage.setItem("userCurrency", select.value);
     overlay.style.display = "none";
     mainContent.style.display = "block";
-    loadRatesAndUpdate(currency);
+    await loadRates(select.value);
   });
 
   changeBtn.addEventListener("click", () => {
     overlay.style.display = "flex";
+    mainContent.style.display = "none";
   });
 
-  // ===============================
-  // PAYHERO STK PUSH (SECURE)
-  // ===============================
+  function showModal(state) {
+    modal.classList.remove("hidden");
+    [loadingState, successState, errorState].forEach(s => s.classList.remove("active"));
+    state.classList.add("active");
+  }
+
+  function closeModal(delay = 4000) {
+    setTimeout(() => modal.classList.add("hidden"), delay);
+  }
+
+  function normalizePhone(input) {
+    let phone = input.replace(/\D/g, "");
+    if (phone.startsWith("0") && phone.length === 10) phone = "254" + phone.slice(1);
+    if (phone.length === 9) phone = "254" + phone;
+    if (!phone.startsWith("254") || phone.length !== 12) return null;
+    return phone;
+  }
+
   contactBtn.addEventListener("click", async () => {
-    let phone = phoneInput.value.trim();
     const token = localStorage.getItem("token");
+    const phone = normalizePhone(phoneInput.value);
 
     paymentMessage.textContent = "";
 
     if (!token) {
-      paymentMessage.textContent = "Please login first.";
+      paymentMessage.textContent = "Please log in to make a payment.";
       return;
     }
 
-    // FIXED: Better phone validation (must start with 254, 12 digits total)
-    if (!phone.startsWith("254") || phone.length !== 12 || isNaN(phone)) {
-      paymentMessage.textContent = "Enter valid phone: 2547XXXXXXXX (12 digits)";
+    if (!phone) {
+      paymentMessage.textContent = "Enter a valid phone number.";
       return;
     }
 
-    contactBtn.disabled = true;  // FIXED: Disable button during request
-    paymentMessage.textContent = "Sending STK prompt…";
+    showModal(loadingState);
 
     try {
-      const res = await fetch(
-        "https://manual-back.onrender.com/api/payhero/stk-push",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`
-          },
-          body: JSON.stringify({ phone, amountKES })  // FIXED: Pass calculated amountKES
-        }
-      );
+      const res = await fetch("https://manual-back.onrender.com/api/payhero/stk-push", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ phone, amountKES })
+      });
 
       const data = await res.json();
 
-      if (!res.ok) {
-        paymentMessage.textContent = data.message || "Payment initiation failed";
-        contactBtn.disabled = false;
+      if (!res.ok || !data.success) {
+        showModal(errorState);
+        closeModal(5000);
         return;
       }
 
-      paymentMessage.textContent = "STK prompt sent. Confirm on your phone.";
+      const reference = data.reference;
+
+      let attempts = 0;
+      const maxAttempts = 45;
+
+      const poll = setInterval(async () => {
+        attempts++;
+
+        try {
+          const statusRes = await fetch(`https://manual-back.onrender.com/api/payhero/status/${reference}`, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+
+          const statusData = await statusRes.json();
+
+          if (statusData.status === "success") {
+            clearInterval(poll);
+            showModal(successState);
+            closeModal(6000);
+            location.reload();
+          } else if (statusData.status === "failed") {
+            clearInterval(poll);
+            showModal(errorState);
+            closeModal(5000);
+          } else if (attempts >= maxAttempts) {
+            clearInterval(poll);
+            showModal(errorState);
+            closeModal(5000);
+          }
+        } catch {
+          if (attempts >= maxAttempts) {
+            clearInterval(poll);
+            showModal(errorState);
+            closeModal(5000);
+          }
+        }
+      }, 4000);
+
     } catch {
-      paymentMessage.textContent = "Network error. Try again.";
-    } finally {
-      contactBtn.disabled = false;  // Re-enable
+      showModal(errorState);
+      closeModal(5000);
     }
   });
 
-  function getFlag(code) {
-    const flags = {
-      USD: "USD",
-      NGN: "NGN",
-      GHS: "GHS",
-      KES: "KES",
-      ZAR: "ZAR",
-      INR: "INR",
-      EUR: "EUR",
-      GBP: "GBP",
-      CAD: "CAD",
-      AUD: "AUD"
-    };
-    return flags[code] || "USD";
-  }
-
   function formatCurrency(amount, currency) {
     const symbols = {
-      USD: "$",
-      EUR: "€",
-      GBP: "£",
-      NGN: "₦",
-      INR: "₹",
-      GHS: "GH₵",
-      KES: "KSh",
-      ZAR: "R",
-      CAD: "$",
-      AUD: "A$"
+      USD: "$", EUR: "€", GBP: "£", NGN: "₦",
+      INR: "₹", GHS: "GH₵", KES: "KSh",
+      ZAR: "R", CAD: "$", AUD: "A$"
     };
-
-    const symbol = symbols[currency] || "$";
-    return `${symbol}${parseFloat(amount).toLocaleString(undefined, {
-      minimumFractionDigits: 2
-    })}`;
+    return `${symbols[currency] || "$"}${amount.toFixed(2)}`;
   }
 });
