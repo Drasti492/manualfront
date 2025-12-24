@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const PRICE_IN_USD = 11.94;
+  const PRICE_IN_USD = 11.949379;
 
   const priceEl = document.getElementById("priceAmount");
   const flagEl = document.getElementById("currencyFlag");
@@ -21,12 +21,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let amountKES = 0;
 
+  // Show currency overlay on first load
   overlay.style.display = "flex";
   mainContent.style.display = "none";
 
+  // Load saved currency
   const savedCurrency = localStorage.getItem("userCurrency");
   if (savedCurrency) select.value = savedCurrency;
 
+  // User verification status
   (async () => {
     document.querySelectorAll(".if-verified, .if-not-verified").forEach(el => el.style.display = "none");
     try {
@@ -38,22 +41,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })();
 
-  async function loadRates(currency) {
-    try {
-      const res = await fetch(API_URL);
-      const data = await res.json();
-      const rate = data.usd[currency.toLowerCase()] || 1;
-      const kesRate = data.usd.kes || 129;
-      priceEl.textContent = formatCurrency(PRICE_IN_USD * rate, currency);
-      flagEl.textContent = currency;
-      amountKES = Math.ceil(PRICE_IN_USD * kesRate);
-    } catch {
-      priceEl.textContent = "$11.94";
-      flagEl.textContent = "USD";
-      amountKES = 1540;
-    }
+  // Load price
+async function loadRates(currency) {
+  try {
+    const res = await fetch(API_URL);
+    const data = await res.json();
+    const rate = data.usd[currency.toLowerCase()] || 1;
+    priceEl.textContent = formatCurrency(PRICE_IN_USD * rate, currency);
+    flagEl.textContent = currency;
+  } catch {
+    priceEl.textContent = "$11.94";
+    flagEl.textContent = "USD";
   }
+  // Always fixed 1540 KES — no fluctuation
+  amountKES = 1540;
+}
 
+  // Continue button
   continueBtn.addEventListener("click", async () => {
     localStorage.setItem("userCurrency", select.value);
     overlay.style.display = "none";
@@ -61,11 +65,13 @@ document.addEventListener("DOMContentLoaded", () => {
     await loadRates(select.value);
   });
 
+  // Change currency button
   changeBtn.addEventListener("click", () => {
     overlay.style.display = "flex";
     mainContent.style.display = "none";
   });
 
+  // Modal helpers
   function showModal(state) {
     modal.classList.remove("hidden");
     [loadingState, successState, errorState].forEach(s => s.classList.remove("active"));
@@ -76,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => modal.classList.add("hidden"), delay);
   }
 
+  // Phone normalizer
   function normalizePhone(input) {
     let phone = input.replace(/\D/g, "");
     if (phone.startsWith("0") && phone.length === 10) phone = "254" + phone.slice(1);
@@ -84,6 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return phone;
   }
 
+  // Payment button
   contactBtn.addEventListener("click", async () => {
     const token = localStorage.getItem("token");
     const phone = normalizePhone(phoneInput.value);

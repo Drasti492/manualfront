@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact — RemoteProJobs</title>
-    <link rel="stylesheet" href="../styles/pricing.css">
-<link rel="stylesheet" href="../styles/navs.css">
-<link rel="stylesheet" href="../styles/upwork.css">
-<link rel="stylesheet" href="../styles/notifications.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing — RemoteProJobs</title>
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../styles/navs.css">
+  <link rel="stylesheet" href="../styles/upwork.css">
+  <link rel="stylesheet" href="../styles/notifications.css">
+  <link rel="stylesheet" href="../styles/pricing.css">
 </head>
 <body>
- <header>
+
+<!-- Header -->
+<header>
   <div class="container">
     <div class="logo">
       <h1><i class="fas fa-briefcase"></i> RemoteProJobs</h1>
     </div>
-
     <button class="nav-toggle" aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
     </button>
-
     <nav>
       <ul>
         <li><a href="./work.html">Earn</a></li>
@@ -30,32 +30,30 @@
         <li><a href="./contact.html">Contact</a></li>
       </ul>
     </nav>
-
     <div class="auth-buttons">
       <a href="./profile.html" class="profile-icon" aria-label="User Profile">
         <i class="fas fa-user"></i>
       </a>
-
-<!-- Notification Bell -->
-<div class="notification-wrapper">
-  <a href="./notifications.html" class="notification-icon" id="notificationBell" aria-label="Notifications">
-    <i class="fas fa-bell"></i>
-    <span class="notification-count" id="notificationCount">0</span>
-  </a>
-</div>
-
-
+      <div class="notification-wrapper">
+        <a href="./notifications.html" class="notification-icon" id="notificationBell">
+          <i class="fas fa-bell"></i>
+          <span class="notification-count" id="notificationCount">0</span>
+        </a>
+      </div>
       <button class="btn btn-outline btn-sm logout-btn" id="logoutBtn">Logout</button>
     </div>
   </div>
 </header>
 
-  <!-- ✅ Toast notification -->
-  <div id="toast" class="toast"></div>
+<!-- Toast -->
+<div id="toast" class="toast"></div>
 
+<!-- Currency Overlay — Shown on first load -->
 <div id="currencyOverlay" class="currency-overlay">
-  <div class="currency-box">
+  <div class="currency-card">
+    <i class="fas fa-globe currency-icon"></i>
     <h2>Select Your Currency</h2>
+    <p>We support payments in multiple currencies for your convenience</p>
     <select id="currencySelect">
       <option value="USD">United States — USD</option>
       <option value="NGN">Nigeria — NGN</option>
@@ -68,137 +66,190 @@
       <option value="CAD">Canada — CAD</option>
       <option value="AUD">Australia — AUD</option>
     </select>
-    <button id="continueBtn" class="btn btn-primary btn-full">Continue</button>
+    <button id="continueBtn" class="btn btn-primary btn-full continue-btn">
+      Continue
+    </button>
   </div>
 </div>
 
-<main id="mainContent" style="display:none;">
-  <div class="pricing-main">
+<!-- Main Pricing Page — Hidden until currency selected -->
+<main id="mainContent">
+  <section class="pricing-section">
     <div class="container">
       <div class="pricing-card">
 
-        <div class="pricing-header">
-          <h2 class="if-not-verified">Get Verified</h2>
-          <h2 class="if-verified">Add Connects</h2>
-          <p>Unlock premium access & apply instantly</p>
-        </div>
+        <!-- Header -->
+        <header class="card-header">
+          <h1 class="title if-not-verified">Upgrade to Premium</h1>
+          <h1 class="title if-verified">Add More Connects</h1>
+          <p class="subtitle">Get verified and unlock unlimited opportunities</p>
+        </header>
 
+        <!-- Price -->
         <div class="price-display">
-          <span id="currencyFlag" class="currency-flag">USD</span>
-          <span id="priceAmount" class="price-amount">$11.94</span>
-          <span class="price-label">One-time payment</span>
+          <div class="price-wrapper">
+            <span id="currencyFlag" class="currency-code">USD</span>
+            <span id="priceAmount" class="price-amount">$11.94</span>
+          </div>
+          <p class="price-note">• Instant activation</p>
         </div>
 
-        <div class="system-notice">
-          <strong>Pay via M-Pesa (PayHero)</strong><br/>
-          You’ll receive an STK prompt on your phone.<br/>
-          Charged securely in Kenyan Shillings (KES).
+        <!-- Benefits -->
+        <section class="benefits-section">
+          <h2 class="section-title">Why Top Freelancers Upgrade</h2>
+          <div class="benefits-grid">
+            <div class="benefit-item">
+              <i class="fas fa-infinity icon"></i>
+              <div>
+                <strong>Get Hooked To high-paying Jobs</strong>
+                <p>Apply to every job without limits</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <i class="fas fa-shield-alt icon"></i>
+              <div>
+                <strong>Verified Badge</strong>
+                <p>Build instant trust with clients</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <i class="fas fa-star icon"></i>
+              <div>
+                <strong>Top Search Ranking</strong>
+                <p>Get seen first by clients</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <i class="fas fa-bolt icon"></i>
+              <div>
+                <strong>+8 Connects Included</strong>
+                <p>Send proposals right away</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <i class="fas fa-wallet icon"></i>
+              <div>
+                <strong>Full Withdrawal Access</strong>
+                <p>Cash out earnings anytime</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <i class="fas fa-trophy icon"></i>
+              <div>
+                <strong>Premium Job Access</strong>
+                <p>Unlock exclusive high-paying jobs</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <i class="fas fa-headset icon"></i>
+              <div>
+                <strong>Priority Support</strong>
+                <p>Get faster help from our team</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Secure Payment Notice -->
+        <div class="secure-notice">
+          <i class="fas fa-lock"></i>
+          <div>
+            <strong>Secure Payment via M-Pesa</strong>
+            <p>You will receive a payment request on your phone</p>
+          </div>
         </div>
 
-        <div class="payment-box">
-          <input type="text" id="payheroPhone" placeholder="2547XXXXXXXX"/>
-          <button id="contactBtn" class="btn btn-success btn-full">
-            Pay & Get Verified
+        <!-- Payment Form -->
+        <div class="payment-form">
+          <input type="text" id="payheroPhone" placeholder="2547XXXXXXXX or 07XXXXXXXX" class="phone-input">
+          <button id="contactBtn" class="pay-button">
+            <i class="fas fa-credit-card"></i> Pay Securely & Upgrade
           </button>
           <p id="paymentMessage" class="payment-message"></p>
         </div>
 
-        <button id="changeCurrencyBtn" class="btn btn-outline btn-full">
+        <!-- Change Currency Button -->
+        <button id="changeCurrencyBtn" class="change-currency-btn">
           Change Currency
         </button>
 
       </div>
     </div>
-  </div>
+  </section>
 </main>
 
-<!-- PAYMENT STATUS MODAL -->
+<!-- Payment Modal -->
 <div id="paymentModal" class="payment-modal hidden">
-  <div class="payment-modal-card">
-
-    <div class="payment-state loading-state active">
+  <div class="modal-card">
+    <div class="state loading-state active">
       <div class="spinner"></div>
-      <h3>Processing Payment</h3>
-      <p>Confirm the STK prompt on your phone</p>
+      <h3>Processing Your Payment</h3>
+      <p>Please confirm the payment request on your phone</p>
     </div>
-
-    <div class="payment-state success-state">
+    <div class="state success-state">
       <div class="icon success">✔</div>
-      <h3>Payment Successful</h3>
-      <p>Your account will be verified shortly</p>
+      <h3>Payment Successful!</h3>
+      <p>Your account is now upgraded with full access</p>
     </div>
-
-    <div class="payment-state error-state">
+    <div class="state error-state">
       <div class="icon error">✖</div>
-      <h3>Payment Failed</h3>
+      <h3>Payment Not Completed</h3>
       <p>Please try again or use a different number</p>
     </div>
-
   </div>
-  </div> <!-- payment-modal-card -->
 </div>
 
+<!-- Footer -->
 <footer>
-    <div class="container">
-        <div class="footer-columns">
-            <div class="footer-column">
-                <h3><i class="fas fa-briefcase"></i> RemoteProJobs</h3>
-                <p>Connecting talent with opportunity. Find your dream job or the perfect candidate.</p>
-             
-            </div>
-            <div class="footer-column">
-                <h4>For Job Seekers</h4>
-               <ul>
-        <li><a href="./work.html">Earn</a></li>
-        <li><a href="./companies.html">Companies</a></li>
-        <li><a href="./resources.html">Resources</a></li>
-        <li><a href="./contact.html">Contact</a></li>
-        <li><a href="./pricing.html">Buy Connects</a></li>
-      </ul>
-            </div>
-           
-            <div class="footer-column">
-                <h4>Contact Us</h4>
-                <ul class="contact-info">
-                <ul class="contact-info">
-                    <li><i class="fas fa-map-marker-alt"></i> 201 E Main St, Suite 500, El Paso, TX 79901.</li>
-                    <li><i class="fas fa-phone"></i>+1-915-503-2586</li>
-                    <li><i class="fas fa-envelope"></i>remoteprojobs@gmail.com</li>
-                </ul>
-            </div>
+  <div class="container">
+    <div class="footer-columns">
+      <div class="footer-column">
+        <h3><i class="fas fa-briefcase"></i> RemoteProJobs</h3>
+        <p>Connecting talent with opportunity. Find your dream job or the perfect candidate.</p>
+      </div>
+      <div class="footer-column">
+        <h4>For Job Seekers</h4>
+        <ul>
+          <li><a href="./work.html">Earn</a></li>
+          <li><a href="./companies.html">Companies</a></li>
+          <li><a href="./resources.html">Resources</a></li>
+          <li><a href="./contact.html">Contact</a></li>
+          <li><a href="./pricing.html">Buy Connects</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Contact Us</h4>
+        <ul class="contact-info">
+          <li><i class="fas fa-map-marker-alt"></i> 201 E Main St, Suite 500, El Paso, TX 79901.</li>
+          <li><i class="fas fa-phone"></i> +1-915-503-2586</li>
+          <li><i class="fas fa-envelope"></i> remoteprojobs@gmail.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 RemoteProJobs. All rights reserved.</p>
+      <div class="footer-legal">
+        <div class="legal-item">
+          <button class="legal-trigger">Privacy Policy <i class="fas fa-chevron-down"></i></button>
+          <div class="legal-dropdown">
+            <p>We only collect data needed to provide and improve our service. Your personal information is never sold to third parties.</p>
+          </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 RemoteProJobs. All rights reserved.</p>
-            <div class="footer-legal">
-  <div class="legal-item">
-    <button class="legal-trigger" aria-expanded="false">
-      Privacy Policy <i class="fas fa-chevron-down"></i>
-    </button>
-    <div class="legal-dropdown">
-      <p>We only collect data needed to provide and improve our service. Your personal information is never sold to third parties.</p>
-    </div>
-  </div>
-
-  <div class="legal-item">
-    <button class="legal-trigger" aria-expanded="false">
-      Terms of Service <i class="fas fa-chevron-down"></i>
-    </button>
-    <div class="legal-dropdown">
-      <p>By using Remote Pro Jobs, you agree to our fair usage policy, no spam, no fake accounts, and respect for all users.</p>
-    </div>
-  </div>
-
-  <div class="legal-item">
-    <button class="legal-trigger" aria-expanded="false">
-      Accessibility <i class="fas fa-chevron-down"></i>
-    </button>
-    <div class="legal-dropdown">
-      <p>We are committed to WCAG 2.1 standards and continuously improve keyboard navigation, screen reader support, and contrast.</p>
-    </div>
-  </div>
-</div>
+        <div class="legal-item">
+          <button class="legal-trigger">Terms of Service <i class="fas fa-chevron-down"></i></button>
+          <div class="legal-dropdown">
+            <p>By using Remote Pro Jobs, you agree to our fair usage policy, no spam, no fake accounts, and respect for all users.</p>
+          </div>
         </div>
+        <div class="legal-item">
+          <button class="legal-trigger">Accessibility <i class="fas fa-chevron-down"></i></button>
+          <div class="legal-dropdown">
+            <p>We are committed to WCAG 2.1 standards and continuously improve keyboard navigation, screen reader support, and contrast.</p>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </footer>
 
 <script src="../scripts/nav.js"></script>
@@ -206,6 +257,5 @@
 <script src="../scripts/notifications.js"></script>
 <script src="../scripts/notificationBell.js"></script>
 <script src="../scripts/pricing.js"></script>
-
 </body>
 </html>
