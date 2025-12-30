@@ -54,7 +54,7 @@ async function loadRates(currency) {
     flagEl.textContent = "USD";
   }
   // Always fixed 1540 KES — no fluctuation
-  amountKES = 1540;
+  amountKES = 1;
 }
 
   // Continue button
