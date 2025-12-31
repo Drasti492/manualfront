@@ -15,7 +15,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     connects: document.getElementById("connects-count"),
     applications: document.getElementById("applications-count"),
     verifiedBanner: document.getElementById("verifiedBanner"),
-    notVerifiedBanner: document.getElementById("notVerifiedBanner")
+    notVerifiedBanner: document.getElementById("notVerifiedBanner"),
+
+    // ✅ NEW — Account Status element
+    accountStatus: document.getElementById("profile-account-status")
   };
 
   // Optional Blue Check if you added it
@@ -55,7 +58,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     els.connects.textContent = u.connects ?? 0;
     els.applications.textContent = u.applications?.length ?? 0;
 
-    // Strict verification: only manual
+    // ===============================
+    // ✅ ACCOUNT STATUS (NEW)
+    // ===============================
+    const status = u.accountStatus === "premium" ? "Premium" : "Regular";
+    if (els.accountStatus) {
+      els.accountStatus.textContent = status;
+
+      // Optional visual emphasis
+      els.accountStatus.style.color =
+        status === "Premium" ? "#f59e0b" : "#64748b";
+      els.accountStatus.style.fontWeight = "700";
+    }
+
+    // ===============================
+    // STRICT VERIFICATION (UNCHANGED)
+    // ===============================
     if (u.isManuallyVerified === true) {
       els.verifiedBanner.style.display = "flex";
       els.notVerifiedBanner.style.display = "none";
