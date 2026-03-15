@@ -48,7 +48,7 @@ function formatNotificationTime(notification) {
     return "Just now";
   }
 
-  // 📅 Older → exact timestamp (professional style)
+  //  Older → exact timestamp (professional style)
   return date.toLocaleString(undefined, {
     year: "numeric",
     month: "short",

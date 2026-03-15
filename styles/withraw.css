@@ -231,3 +231,38 @@ body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1e293b; li
   color: #065f46;
   border: 1px solid #6ee7b7;
 }
+
+
+
+
+/* Improve form clarity */
+.form-group.info-row small {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+#payment-address-group {
+    transition: all 0.3s ease;
+}
+
+#payment-address {
+    transition: border-color 0.3s;
+}
+
+#payment-address:focus {
+    border-color: #10b981;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+/* Make label icons consistent size */
+.info-row label i {
+    width: 22px;
+    text-align: center;
+}
+
+/* Hint text styling */
+#address-hint {
+    font-size: 0.88rem;
+    line-height: 1.4;
+}

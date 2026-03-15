@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     verifiedBanner: document.getElementById("verifiedBanner"),
     notVerifiedBanner: document.getElementById("notVerifiedBanner"),
 
-    // ✅ NEW — Account Status element
+    //  NEW — Account Status element
     accountStatus: document.getElementById("profile-account-status")
   };
 
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     els.applications.textContent = u.applications?.length ?? 0;
 
     // ===============================
-    // ✅ ACCOUNT STATUS (NEW)
+    //  ACCOUNT STATUS (NEW)
     // ===============================
     const status = u.accountStatus === "premium" ? "Premium" : "Regular";
     if (els.accountStatus) {

@@ -49,7 +49,7 @@
     </div>
   </header>
 
-  <!-- ✅ Toast notification -->
+  <!-- Toast notification -->
   <div id="toast" class="toast"></div>
 
     <main class="withdraw-main" style="display:none;" id="mainContent">
@@ -78,7 +78,7 @@
                         <i class="fas fa-wallet"></i>
                     </div>
                     <h2>Withdraw Earnings</h2>
-                    <p class="disclaimer">Minimum withdrawal is $24. A 0.38% tax will be deducted from your withdrawal amount.</p>
+                    <p class="disclaimer">Minimum withdrawal is $38. A 0.38% tax will be deducted from your withdrawal amount.</p>
                 </div>
 
                 <!-- Quick Stats -->
@@ -105,44 +105,76 @@
 </div>
 
 
-                <!-- Withdrawal Form (Only for Verified) -->
-                <div class="info-section if-verified" style="display:none;">
-                    <h3>Request Withdrawal</h3>
-                    <p>Withdraw via mobile money (PayPal, Venmo, Cash App, and other major USA mobile payment systems supported).</p>
-                    <form id="withdrawal-form">
-                        <div class="form-group info-row">
-                            <label for="withdrawal-amount"><i class="fas fa-dollar-sign"></i> Amount ($):</label>
-                            <input type="number" id="withdrawal-amount" placeholder="Enter amount (min $12)" step="1" min="12" required>
-                        </div>
-                        <div class="form-group info-row">
-                            <label for="mobile-number"><i class="fas fa-mobile-alt"></i> Mobile Payment Number/ID:</label>
-                            <input type="text" id="mobile-number" placeholder="Enter Mobile Number, PayPal, Venmo, or Cash App ID" required>
-                        </div>
-                        <div class="form-group info-row">
-                            <label for="payment-method"><i class="fas fa-credit-card"></i> Payment Method:</label>
-                            <select id="payment-method" required>
-                                <option value="" disabled selected>Select payment method</option>
-                                <option value="Phone Number">Phone Number</option>
-                                <option value="PayPal">PayPal</option>
-                                <option value="Venmo">Venmo</option>
-                                <option value="Cash App">Cash App</option>
-                            </select>
-                        </div>
-                        <p class="tax-notice">A 0.38% tax will be applied (e.g., $0.05 for a $12 withdrawal).</p>
-                        <div class="notification-slide" id="withdraw-notification"></div>
-                        <button type="submit" class="btn btn-primary btn-full withdraw-btn">Submit Withdrawal</button>
-                    </form>
-                </div>
+<!-- Withdrawal Form (Only for Verified) -->
+<div class="info-section if-verified" style="display:none;">
+    <h3>Request Withdrawal</h3>
+    <p style="margin-bottom: 1.5rem; color: #475569;">
+        Minimum withdrawal: $38. Processing usually takes 1–3 business days after approval.
+    </p>
 
-                <!-- Action Buttons -->
-                <div class="profile-actions">
-                    <button class="btn btn-outline btn-full" onclick="window.location.href='./work.html'">Start Earning</button>
-                    <button class="btn btn-primary btn-full" id="profileBtn" onclick="window.location.href='./profile.html'">Back to Profile</button>
-                </div>
-
-            </div>
+    <form id="withdrawal-form">
+        <div class="form-group info-row">
+            <label for="withdrawal-amount">
+                <i class="fas fa-dollar-sign"></i> Withdrawal Amount ($)
+            </label>
+            <input 
+                type="number" 
+                id="withdrawal-amount" 
+                placeholder="Minimum $38" 
+                step="1" 
+                min="38" 
+                required
+            >
+            <small style="color:#64748b; display:block; margin-top:6px;">
+                Available balance: <span id="available-balance">$0.00</span>
+            </small>
         </div>
-    </main>
+
+        <div class="form-group info-row">
+            <label for="payment-method">
+                <i class="fas fa-credit-card"></i> Select Payment Method
+            </label>
+            <select id="payment-method" required>
+                <option value="" disabled selected>Choose method...</option>
+                <option value="PayPal">PayPal (Email)</option>
+                <option value="Venmo">Venmo (Username or Phone)</option>
+                <option value="Cash App">Cash App ($Cashtag)</option>
+                <option value="Phone Number">Mobile Money / Phone Number</option>
+                <!-- You can easily add more later: Zelle, Apple Pay, etc. -->
+            </select>
+        </div>
+
+        <div class="form-group info-row" id="payment-address-group" style="display:none;">
+            <label for="payment-address" id="payment-address-label">
+                <i class="fas fa-id-card"></i> Payment Details
+            </label>
+            <input 
+                type="text" 
+                id="payment-address" 
+                placeholder="Enter your details here..." 
+                required
+            >
+            <small id="address-hint" style="color:#64748b; display:block; margin-top:6px;"></small>
+        </div>
+
+        <p class="tax-notice" style="margin: 1.5rem 0; font-size: 0.95rem; color:#475569;">
+            A small processing fee of 0.38% will be applied (e.g. $0.56 on $56 withdrawal).
+        </p>
+
+        <div class="notification-slide" id="withdraw-notification"></div>
+
+        <button type="submit" class="btn btn-primary btn-full withdraw-btn">
+            <i class="fas fa-paper-plane"></i> Submit Withdrawal Request
+        </button>
+    </form>
+</div>
+
+<!-- Action Buttons (unchanged) -->
+<div class="profile-actions">
+    <button class="btn btn-outline btn-full" onclick="window.location.href='./work.html'">Start Earning</button>
+    <button class="btn btn-primary btn-full" id="profileBtn" onclick="window.location.href='./profile.html'">Back to Profile</button>
+</div>
+
 
    <footer>
     <div class="container">

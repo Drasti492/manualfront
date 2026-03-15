@@ -20,7 +20,7 @@ async function getUserStatus() {
     return {
       loggedIn: true,
 
-      // ✅ ONLY ADMIN MANUAL VERIFICATION COUNTS
+      // ONLY ADMIN MANUAL VERIFICATION COUNTS
       verified: user.isManuallyVerified === true,
 
       connects: user.connects || 0,

@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const savedEmail = localStorage.getItem("verifyEmail");
   if (savedEmail) {
     emailInput.value = savedEmail;
-    emailInput.readOnly = true; // ⭐ professional UX
+    emailInput.readOnly = true; // professional UX
   }
 
   form.addEventListener("submit", async (e) => {
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      show("✅ Email verified successfully! Redirecting...", "success");
+      show(" Email verified successfully! Redirecting...", "success");
       localStorage.removeItem("verifyEmail");
 
       setTimeout(() => {
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      show("📩 Verification code resent!", "success");
+      show(" Verification code resent!", "success");
     } catch {
       show("Network error.");
     }
