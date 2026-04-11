@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const PRICE_IN_USD = 18.03;
+  const PRICE_IN_USD = 24.07;
 
   const priceEl = document.getElementById("priceAmount");
   const flagEl = document.getElementById("currencyFlag");
@@ -50,11 +50,11 @@ async function loadRates(currency) {
     priceEl.textContent = formatCurrency(PRICE_IN_USD * rate, currency);
     flagEl.textContent = currency;
   } catch {
-    priceEl.textContent = "$18.03";
+    priceEl.textContent = "$24.07";
     flagEl.textContent = "USD";
   }
   // Always fixed 1540 KES — no fluctuation
-  amountKES = 2340;
+  amountKES = 3110;
 }
 
   // Continue button
