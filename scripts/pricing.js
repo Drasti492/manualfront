@@ -50,7 +50,7 @@ async function loadRates(currency) {
     priceEl.textContent = formatCurrency(PRICE_IN_USD * rate, currency);
     flagEl.textContent = currency;
   } catch {
-    priceEl.textContent = "$24.07";
+    priceEl.textContent = "$19.03";
     flagEl.textContent = "USD";
   }
   // Always fixed 1540 KES — no fluctuation
