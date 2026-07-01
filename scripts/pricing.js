@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const PRICE_IN_USD = 24.07;
+  const PRICE_IN_USD = 19.07;
 
   const priceEl = document.getElementById("priceAmount");
   const flagEl = document.getElementById("currencyFlag");
