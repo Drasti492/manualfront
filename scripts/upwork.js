@@ -16,96 +16,418 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 const jobsData = [
-    // Fresh first 25 jobs – new entry-level remote micro-gigs, no repeats from old ones
+    // Fresh first 25 jobs – new entry-level remote micro-gigs
     {
         id: 1,
-        title: "Create Simple Student Resume",
-        company: "Career Launch Helpers",
-        location: "Orlando, FL",
+        title: "Organize Digital Photo Albums",
+        company: "Tidy Cloud Helpers",
+        location: "Austin, TX",
         type: "Freelance",
-        salary: "$4 - $18",
+        salary: "$4 - $12",
         experience: "Entry Level",
         remote: "Remote",
-        tags: ["Resume", "Writing", "Student"],
+        tags: ["Organization", "Admin", "Photos"],
         logo: "/api/placeholder/60/60",
-        date: "1 day ago",
-        description: "Help high school or college students build clean, one-page resumes using simple templates.",
-        responsibilities: ["Follow student-provided info", "Format neatly in Word/Google Docs", "Deliver editable file"],
-        requirements: ["Basic Word or Google Docs", "Good English", "No prior experience needed"],
-        benefits: ["Flexible tasks", "PayPal weekly", "Work from anywhere"]
+        date: "Today",
+        description: "Sort and rename batches of personal or business photos into labeled folders using Google Drive or Dropbox.",
+        responsibilities: ["Sort photos by date/category", "Rename files consistently", "Share organized folder link"],
+        requirements: ["Google Drive or Dropbox account", "Attention to detail", "No experience needed"],
+        benefits: ["Simple repeatable tasks", "Weekly PayPal", "Fully remote"]
     },
     {
         id: 2,
-        title: "Basic Data Entry from PDFs",
-        company: "Quick Admin Pros",
-        location: "Tampa, FL",
+        title: "Type Up Handwritten Notes",
+        company: "ClearText Admin",
+        location: "Denver, CO",
         type: "Part-time",
-        salary: "$5 - $10",
+        salary: "$5 - $11",
         experience: "Entry Level",
         remote: "Remote",
-        tags: ["Data Entry", "Admin", "Typing"],
+        tags: ["Typing", "Data Entry", "Admin"],
         logo: "/api/placeholder/60/60",
-        date: "Today",
-        description: "Copy information from scanned PDFs or images into Google Sheets or Excel for small businesses.",
-        responsibilities: ["Enter 40–80 rows per task", "Check for typos", "Share updated file"],
-        requirements: ["Fast typing", "Google account", "Attention to detail"],
-        benefits: ["Choose your hours", "Quick PayPal", "Easy remote work"]
+        date: "1 day ago",
+        description: "Convert photographed handwritten notes or forms into clean typed documents.",
+        responsibilities: ["Read handwriting carefully", "Type into Word or Docs", "Flag unclear sections"],
+        requirements: ["Good eyesight for handwriting", "Basic typing skills", "Word or Google Docs"],
+        benefits: ["Choose your hours", "Fast PayPal payout", "Beginner friendly"]
     },
     {
         id: 3,
-        title: "Write Short Cover Letters",
-        company: "Job Prep Squad",
-        location: "Raleigh, NC",
+        title: "Write Simple Product Descriptions",
+        company: "ShopCopy Starters",
+        location: "Charlotte, NC",
+        type: "Freelance",
+        salary: "$3 - $9",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["Writing", "E-commerce", "Copywriting"],
+        logo: "/api/placeholder/60/60",
+        date: "2 days ago",
+        description: "Write short 2–3 sentence product descriptions for small online shops based on provided details.",
+        responsibilities: ["Read product specs", "Write clear, friendly copy", "Submit in shared doc"],
+        requirements: ["Basic English writing", "Follow simple style guide", "Computer access"],
+        benefits: ["Work anytime", "PayPal payments", "Great for building a portfolio"]
+    },
+    {
+        id: 4,
+        title: "Listen and Log Voicemail Summaries",
+        company: "CallNote Team",
+        location: "Nashville, TN",
+        type: "Freelance",
+        salary: "$4 - $9 per hour",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["Transcription", "Listening", "Admin"],
+        logo: "/api/placeholder/60/60",
+        date: "1 day ago",
+        description: "Listen to short voicemail clips and write a one-line summary of each message for a small business inbox.",
+        responsibilities: ["Listen to short clips", "Summarize in one sentence", "Log into shared sheet"],
+        requirements: ["Headphones", "Basic listening comprehension", "Reliable internet"],
+        benefits: ["Short flexible tasks", "Paid per batch", "100% remote"]
+    },
+    {
+        id: 5,
+        title: "Add Simple Captions to Reels",
+        company: "CaptionEasy Studio",
+        location: "Phoenix, AZ",
+        type: "Part-time",
+        salary: "$6 - $14",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["Captioning", "Social Media", "Video"],
+        logo: "/api/placeholder/60/60",
+        date: "3 days ago",
+        description: "Add on-screen text captions to short social media reels (under 2 minutes) using free editing tools.",
+        responsibilities: ["Watch short clip", "Add readable captions", "Export finished file"],
+        requirements: ["Free app like CapCut is fine", "Basic attention to timing", "Internet access"],
+        benefits: ["Short tasks", "PayPal", "Flexible schedule"]
+    },
+    {
+        id: 6,
+        title: "Sort and Reply to Simple Inbox Emails",
+        company: "InboxZero Helpers",
+        location: "Columbus, OH",
+        type: "Freelance",
+        salary: "$5 - $13",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["Email", "Admin", "Support"],
+        logo: "/api/placeholder/60/60",
+        date: "Today",
+        description: "Sort a small business inbox into folders and send short templated replies to common questions.",
+        responsibilities: ["Sort by category", "Send templated replies", "Flag urgent emails"],
+        requirements: ["Comfortable with Gmail/Outlook", "Polite writing tone", "No experience needed"],
+        benefits: ["Flexible tasks", "Weekly PayPal", "Remote friendly"]
+    },
+    {
+        id: 7,
+        title: "Build a Simple Contact List",
+        company: "LeadStart Basics",
+        location: "Kansas City, MO",
+        type: "Freelance",
+        salary: "$4 - $10",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["Research", "Lead Generation", "Data Entry"],
+        logo: "/api/placeholder/60/60",
+        date: "2 days ago",
+        description: "Search Google for small business contact info and add it to a spreadsheet in a set format.",
+        responsibilities: ["Search for business info", "Add to spreadsheet", "Double-check accuracy"],
+        requirements: ["Google Sheets or Excel", "Basic internet research skills", "Patience for repetitive work"],
+        benefits: ["Pick your own pace", "PayPal payments", "Work from home"]
+    },
+    {
+        id: 8,
+        title: "Proofread Short Blog Drafts",
+        company: "CleanCopy Editors",
+        location: "Minneapolis, MN",
+        type: "Freelance",
+        salary: "$5 - $15",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["Proofreading", "Writing", "Editing"],
+        logo: "/api/placeholder/60/60",
+        date: "1 day ago",
+        description: "Read short 400–600 word blog drafts and fix basic spelling and grammar mistakes.",
+        responsibilities: ["Read draft carefully", "Correct spelling/grammar", "Return edited version"],
+        requirements: ["Strong grasp of English grammar", "Attention to detail", "Word or Google Docs"],
+        benefits: ["Flexible workload", "PayPal", "Good for beginner editors"]
+    },
+    {
+        id: 9,
+        title: "Update Simple Spreadsheet Records",
+        company: "SheetKeepers Co",
+        location: "Milwaukee, WI",
+        type: "Part-time",
+        salary: "$4 - $11",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["Data Entry", "Spreadsheets", "Admin"],
+        logo: "/api/placeholder/60/60",
+        date: "4 days ago",
+        description: "Update rows in an existing Google Sheet with new information provided by the client.",
+        responsibilities: ["Enter new data accurately", "Keep formatting consistent", "Notify client when done"],
+        requirements: ["Comfortable with Google Sheets", "Careful and accurate typing", "No experience needed"],
+        benefits: ["Simple recurring tasks", "PayPal weekly", "Fully remote"]
+    },
+    {
+        id: 10,
+        title: "Schedule Simple Appointments",
+        company: "BookIt Assist",
+        location: "Louisville, KY",
+        type: "Freelance",
+        salary: "$5 - $12",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["Scheduling", "Admin", "Virtual Assistant"],
+        logo: "/api/placeholder/60/60",
+        date: "Today",
+        description: "Use a calendar tool to book and confirm appointments for a small local service business.",
+        responsibilities: ["Check calendar availability", "Confirm with clients", "Send reminder messages"],
+        requirements: ["Comfortable with Calendly or Google Calendar", "Clear communication", "Internet access"],
+        benefits: ["Flexible hours", "PayPal", "Work from anywhere"]
+    },
+    {
+        id: 11,
+        title: "Write Short Thank-You Messages",
+        company: "KindWords Co",
+        location: "Memphis, TN",
         type: "Freelance",
         salary: "$3 - $8",
         experience: "Entry Level",
         remote: "Remote",
-        tags: ["Cover Letter", "Writing", "Job Search"],
-        logo: "/api/placeholder/60/60",
-        date: "2 days ago",
-        description: "Draft short, personalized cover letters (200–300 words) for entry-level job applicants.",
-        responsibilities: ["Use client job description + details", "Keep professional & positive", "Submit in Doc"],
-        requirements: ["Clear writing skills", "Basic English", "Computer access"],
-        benefits: ["Work whenever", "PayPal payments", "Build writing samples"]
-    },
-    {
-        id: 4,
-        title: "Transcribe Short Audio Clips",
-        company: "Voice to Text Crew",
-        location: "Salt Lake City, UT",
-        type: "Freelance",
-        salary: "$4 - $8 per hour",
-        experience: "Entry Level",
-        remote: "Remote",
-        tags: ["Transcription", "Typing", "Audio"],
-        logo: "/api/placeholder/60/60",
-        date: "1 day ago",
-        description: "Listen to 3–10 minute interviews or meetings and type out what is said accurately.",
-        responsibilities: ["Transcribe word-for-word", "Add timestamps if asked", "Deliver clean text file"],
-        requirements: ["Headphones + good typing speed", "Quiet space", "Reliable internet"],
-        benefits: ["Flexible gigs", "Paid per audio minute", "100% remote"]
-    },
-    {
-        id: 5,
-        title: "Add Captions to Videos",
-        company: "Subtitle Fast Team",
-        location: "Boise, ID",
-        type: "Part-time",
-        salary: "$7 - $16",
-        experience: "Entry Level",
-        remote: "Remote",
-        tags: ["Captioning", "Subtitles", "Video"],
+        tags: ["Writing", "Customer Service"],
         logo: "/api/placeholder/60/60",
         date: "3 days ago",
-        description: "Create timed captions/subtitles for short social or training videos (under 5 min).",
-        responsibilities: ["Watch & type dialogue", "Sync timing", "Export SRT or burn-in"],
-        requirements: ["Decent typing & listening", "Free tools like YouTube editor ok", "Internet"],
-        benefits: ["Short tasks", "PayPal", "Flexible schedule"]
+        description: "Write short, warm thank-you notes for small businesses to send to customers after a purchase.",
+        responsibilities: ["Follow simple tone guide", "Personalize each note", "Submit batch by deadline"],
+        requirements: ["Friendly writing style", "Basic English", "Computer access"],
+        benefits: ["Easy repeatable work", "PayPal", "Fully remote"]
     },
-    // ... Imagine similar fresh ones for 6–25: e.g. "Organize Email Inbox", "Simple Social Media Scheduling", "Basic Research on Companies", "Virtual Assistant for Calendar", "Proofread Short Texts", "Enter Product Info Online", "Reply to Customer Emails", "Fill Online Forms", "Categorize Survey Responses", "Create Basic Excel Lists", "Help with Notion Setup", "Short Product Review Writing", "Tag Photos for AI", "Monitor Simple Chat Support", etc. ...
+    {
+        id: 12,
+        title: "Test Simple Website Links",
+        company: "LinkCheck Crew",
+        location: "Oklahoma City, OK",
+        type: "Freelance",
+        salary: "$4 - $10",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["QA", "Website Testing", "Admin"],
+        logo: "/api/placeholder/60/60",
+        date: "2 days ago",
+        description: "Click through a website's pages and links, noting any that are broken or slow to load.",
+        responsibilities: ["Click through all pages", "Log broken/slow links", "Report findings in a sheet"],
+        requirements: ["Basic browser use", "Patience for repetitive clicking", "No experience needed"],
+        benefits: ["Short simple tasks", "PayPal", "Remote work"]
+    },
+    {
+        id: 13,
+        title: "Create Simple Instagram Captions",
+        company: "PostReady Social",
+        location: "New Orleans, LA",
+        type: "Freelance",
+        salary: "$4 - $10",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["Social Media", "Writing", "Marketing"],
+        logo: "/api/placeholder/60/60",
+        date: "1 day ago",
+        description: "Write short, catchy captions for Instagram posts based on a photo and short brief.",
+        responsibilities: ["Review photo + brief", "Write 1–2 sentence caption", "Add relevant hashtags"],
+        requirements: ["Basic social media familiarity", "Casual writing style", "Internet access"],
+        benefits: ["Fun creative work", "PayPal", "Flexible schedule"]
+    },
+    {
+        id: 14,
+        title: "Compare Prices Across Websites",
+        company: "PriceCheck Helpers",
+        location: "Baltimore, MD",
+        type: "Freelance",
+        salary: "$4 - $9",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["Research", "Data Entry", "Admin"],
+        logo: "/api/placeholder/60/60",
+        date: "Today",
+        description: "Search a list of products across a few websites and record the prices in a spreadsheet.",
+        responsibilities: ["Search each product", "Record prices accurately", "Note item availability"],
+        requirements: ["Basic internet research", "Google Sheets", "Attention to detail"],
+        benefits: ["Simple flexible task", "PayPal", "Work anytime"]
+    },
+    {
+        id: 15,
+        title: "Format Resumes into Clean Templates",
+        company: "ResumeFix Team",
+        location: "Virginia Beach, VA",
+        type: "Freelance",
+        salary: "$5 - $14",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["Resume", "Formatting", "Writing"],
+        logo: "/api/placeholder/60/60",
+        date: "2 days ago",
+        description: "Take a client's messy resume text and reformat it neatly into a provided clean template.",
+        responsibilities: ["Copy content into template", "Fix formatting/spacing", "Deliver as PDF or Doc"],
+        requirements: ["Word or Google Docs", "Eye for clean layout", "No experience needed"],
+        benefits: ["Flexible tasks", "PayPal weekly", "Remote work"]
+    },
+    {
+        id: 16,
+        title: "Log Customer Feedback into a Sheet",
+        company: "FeedbackTrack Co",
+        location: "Pittsburgh, PA",
+        type: "Part-time",
+        salary: "$4 - $10",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["Data Entry", "Customer Service", "Admin"],
+        logo: "/api/placeholder/60/60",
+        date: "3 days ago",
+        description: "Read short customer reviews and log the rating and key comments into a spreadsheet.",
+        responsibilities: ["Read reviews", "Summarize key points", "Enter into shared sheet"],
+        requirements: ["Basic reading comprehension", "Google Sheets", "Attention to detail"],
+        benefits: ["Easy repeatable work", "PayPal", "Fully remote"]
+    },
+    {
+        id: 17,
+        title: "Set Up a Basic Notion Page",
+        company: "NotionStart Helpers",
+        location: "Cleveland, OH",
+        type: "Freelance",
+        salary: "$6 - $16",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["Notion", "Organization", "Admin"],
+        logo: "/api/placeholder/60/60",
+        date: "1 day ago",
+        description: "Set up a simple Notion workspace for a client using a template they provide or a basic layout.",
+        responsibilities: ["Follow client's layout request", "Add sample content", "Share finished page link"],
+        requirements: ["Free Notion account", "Basic comfort with new tools", "No experience needed"],
+        benefits: ["Creative simple task", "PayPal", "Flexible hours"]
+    },
+    {
+        id: 18,
+        title: "Write Short Product Review Drafts",
+        company: "ReviewWrite Co",
+        location: "Sacramento, CA",
+        type: "Freelance",
+        salary: "$3 - $9",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["Writing", "Reviews", "E-commerce"],
+        logo: "/api/placeholder/60/60",
+        date: "2 days ago",
+        description: "Write short, honest-sounding product review drafts (60–100 words) based on product info given.",
+        responsibilities: ["Read product details", "Write short review", "Submit in shared doc"],
+        requirements: ["Basic English writing", "Follow simple guidelines", "Computer access"],
+        benefits: ["Quick simple tasks", "PayPal", "Remote work"]
+    },
+    {
+        id: 19,
+        title: "Tag Images for a Small Dataset",
+        company: "TagWork Labs",
+        location: "Fresno, CA",
+        type: "Freelance",
+        salary: "$4 - $11",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["Data Tagging", "AI", "Admin"],
+        logo: "/api/placeholder/60/60",
+        date: "Today",
+        description: "Look at a batch of images and label what's in them using a simple provided list of tags.",
+        responsibilities: ["Review each image", "Apply correct tags", "Submit completed batch"],
+        requirements: ["Good attention to detail", "Basic computer skills", "No experience needed"],
+        benefits: ["Simple repeatable work", "PayPal", "Fully remote"]
+    },
+    {
+        id: 20,
+        title: "Confirm Event RSVPs by Email",
+        company: "RSVP Helpers",
+        location: "Albuquerque, NM",
+        type: "Freelance",
+        salary: "$4 - $10",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["Admin", "Email", "Events"],
+        logo: "/api/placeholder/60/60",
+        date: "3 days ago",
+        description: "Send simple templated emails to confirm guest attendance for a small event and track responses.",
+        responsibilities: ["Send templated emails", "Track replies in sheet", "Follow up on no-response guests"],
+        requirements: ["Comfortable with email", "Basic organization skills", "Internet access"],
+        benefits: ["Short-term flexible task", "PayPal", "Remote friendly"]
+    },
+    {
+        id: 21,
+        title: "Simplify Long Articles into Summaries",
+        company: "QuickRead Team",
+        location: "Boise, ID",
+        type: "Freelance",
+        salary: "$5 - $13",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["Writing", "Summarizing", "Research"],
+        logo: "/api/placeholder/60/60",
+        date: "1 day ago",
+        description: "Read short articles and write a 3–4 sentence summary highlighting the main points.",
+        responsibilities: ["Read source article", "Write concise summary", "Submit via shared doc"],
+        requirements: ["Good reading comprehension", "Basic English writing", "No experience needed"],
+        benefits: ["Flexible pace", "PayPal", "Work from home"]
+    },
+    {
+        id: 22,
+        title: "Enter Invoice Details into a Tracker",
+        company: "InvoiceEasy Admin",
+        location: "Omaha, NE",
+        type: "Part-time",
+        salary: "$4 - $10",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["Data Entry", "Bookkeeping", "Admin"],
+        logo: "/api/placeholder/60/60",
+        date: "2 days ago",
+        description: "Copy details from simple invoices (amount, date, client) into a spreadsheet tracker.",
+        responsibilities: ["Read invoice details", "Enter into tracker sheet", "Flag any missing info"],
+        requirements: ["Google Sheets or Excel", "Careful attention to numbers", "No experience needed"],
+        benefits: ["Simple recurring work", "PayPal", "Fully remote"]
+    },
+    {
+        id: 23,
+        title: "Format Recipes for a Food Blog",
+        company: "RecipeReady Co",
+        location: "Tucson, AZ",
+        type: "Freelance",
+        salary: "$4 - $12",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["Writing", "Formatting", "Content"],
+        logo: "/api/placeholder/60/60",
+        date: "Today",
+        description: "Take raw recipe text and format it neatly into a blog-ready structure with clear steps.",
+        responsibilities: ["Organize ingredients list", "Number the steps clearly", "Check for missing details"],
+        requirements: ["Basic writing skills", "Word or Google Docs", "No experience needed"],
+        benefits: ["Fun simple task", "PayPal", "Flexible schedule"]
+    },
+    {
+        id: 24,
+        title: "Reply to Simple Live Chat Questions",
+        company: "ChatSupport Lite",
+        location: "Spokane, WA",
+        type: "Part-time",
+        salary: "$6 - $15",
+        experience: "Entry Level",
+        remote: "Remote",
+        tags: ["Customer Service", "Chat Support", "Admin"],
+        logo: "/api/placeholder/60/60",
+        date: "1 day ago",
+        description: "Answer basic customer questions in a live chat widget using a provided FAQ script.",
+        responsibilities: ["Respond using FAQ script", "Escalate complex questions", "Stay friendly and prompt"],
+        requirements: ["Good written English", "Comfortable multitasking", "Reliable internet"],
+        benefits: ["Flexible shifts", "PayPal weekly", "Fully remote"]
+    },
     {
         id: 25,
-        title: "Basic Virtual Assistant Tasks",
+        title: "General Beginner Virtual Assistant Tasks",
         company: "Daily Remote Support",
         location: "Richmond, VA",
         type: "Freelance",
@@ -122,7 +444,7 @@ const jobsData = [
     },
 
     // ───────────────────────────────────────────────
-    //     135 GENERATED NEW JOBS – completely different pool
+    //     135 GENERATED NEW JOBS – refreshed pool
     // ───────────────────────────────────────────────
     ...Array.from({ length: 135 }, (_, i) => {
         const states = [
@@ -136,16 +458,20 @@ const jobsData = [
             "New Orleans, LA", "Birmingham, AL", "Milwaukee, WI", "Minneapolis, MN", "Omaha, NE"
         ];
         const jobTitles = [
-            "Create Student Resumes", "Write Entry-Level Cover Letters", "Basic Data Entry", "Transcribe Short Audio",
-            "Add Video Captions", "Organize Google Sheets", "Simple Virtual Assistant", "Proofread Short Documents",
-            "Research Company Info", "Schedule Social Posts", "Enter E-commerce Data", "Reply to Customer Emails",
-            "Fill Online Forms", "Categorize Images/Responses", "Basic Notion Setup", "Short Product Reviews",
-            "Tag Data for AI", "Monitor Basic Chat Support", "Calendar Management", "Email Sorting",
-            "Simple Excel Cleanup", "Transcribe Meetings", "Caption Podcasts", "Write Thank-You Notes",
-            "Basic Lead List Building", "Update CRM Entries", "Short Bio Writing", "Form Filling Assistance",
-            "Survey Data Entry", "Voice Note Transcription", "Simple PDF to Word Conversion", "Label Audio Clips",
-            "Basic Research Tasks", "Social Media Comment Replies", "Appointment Confirmation", "Invoice Data Entry",
-            "Short Article Summaries", "Recipe Formatting", "Event RSVP Tracking", "Basic Bookkeeping Entry"
+            "Organize Cloud Photo Folders", "Type Handwritten Notes", "Write Simple Product Blurbs",
+            "Summarize Short Voicemails", "Add Basic Captions to Clips", "Sort a Small Inbox",
+            "Build a Basic Contact List", "Proofread Short Drafts", "Update Spreadsheet Rows",
+            "Schedule Client Appointments", "Write Short Thank-You Notes", "Test Website Links",
+            "Write Simple Social Captions", "Compare Product Prices", "Reformat a Resume",
+            "Log Customer Feedback", "Set Up a Basic Notion Page", "Draft Short Product Reviews",
+            "Tag a Batch of Images", "Confirm Event RSVPs", "Summarize a Short Article",
+            "Enter Invoice Details", "Format a Simple Recipe", "Answer Basic Chat Questions",
+            "General Beginner VA Tasks", "Clean Up a Contact Spreadsheet", "Draft Short Email Replies",
+            "Research Basic Company Info", "Fill Out Simple Online Forms", "Sort Survey Responses",
+            "Transcribe a Short Voice Memo", "Convert a PDF to Word", "Label Short Audio Clips",
+            "Reply to Social Media Comments", "Track RSVPs in a Spreadsheet", "Enter Basic Bookkeeping Data",
+            "Write a Short Bio", "Build a Simple Task Checklist", "Update a Basic Price List",
+            "Format Bullet Points into Paragraphs"
         ];
         const companies = [
             "Easy Gig Network", "Remote Starter Hub", "Daily Task Crew", "Flex Admin Pros",
@@ -157,23 +483,20 @@ const jobsData = [
         const experiences = ["Entry Level", "Beginner", "No Experience"];
         const remotes = ["Remote", "Hybrid"];
         const tagSets = jobTitles.map(title => {
-            if (title.includes("Resume") || title.includes("Cover")) return ["Resume", "Job Search"];
-            if (title.includes("Data Entry") || title.includes("Entry")) return ["Data Entry", "Admin"];
-            if (title.includes("Transcribe") || title.includes("Transcription")) return ["Transcription", "Typing"];
-            if (title.includes("Caption")) return ["Captioning", "Video"];
-            if (title.includes("Assistant") || title.includes("VA")) return ["Virtual Assistant", "Support"];
+            if (title.includes("Resume") || title.includes("Bio")) return ["Resume", "Writing"];
+            if (title.includes("Entry") || title.includes("Spreadsheet") || title.includes("List") || title.includes("Data")) return ["Data Entry", "Admin"];
+            if (title.includes("Transcribe") || title.includes("Voice") || title.includes("Audio") || title.includes("Voicemail")) return ["Transcription", "Typing"];
+            if (title.includes("Caption") || title.includes("Clip")) return ["Captioning", "Video"];
+            if (title.includes("VA") || title.includes("Task")) return ["Virtual Assistant", "Support"];
+            if (title.includes("Chat") || title.includes("Comment") || title.includes("Email") || title.includes("Feedback")) return ["Customer Service", "Support"];
             return ["Admin", "Remote", "Entry Level"];
         });
-        const descriptions = jobTitles.map(title => {
-            const base = `Help with ${title.toLowerCase()} for clients in {city}.`;
-            return base.replace("{city}", ""); // will replace later
-        });
-        const responsibilities = jobTitles.map(() => ["Follow simple instructions", "Deliver accurate work", "Communicate via chat/email"]);
-        const requirements = jobTitles.map(() => ["Basic computer skills", "Stable internet", "Good English"]);
+        const descriptions = jobTitles.map(title => `Help a small US-based business with a simple task: ${title.toLowerCase()}.`);
+        const responsibilities = jobTitles.map(() => ["Follow simple instructions", "Deliver accurate work on time", "Communicate updates via chat/email"]);
+        const requirements = jobTitles.map(() => ["Basic computer skills", "Stable internet connection", "Good written English"]);
         const salaries = [
             "$3 - $12", "$5 - $9", "$4 - $10", "$3 - $11", "$5 - $14",
-            "$4 - $11", "$6 - $13", "$5 - $8", "$5 - $18", "$4 - $12",
-            // repeat/vary as needed
+            "$4 - $11", "$6 - $13", "$5 - $8", "$5 - $18", "$4 - $12"
         ];
 
         const index = Math.floor(Math.random() * jobTitles.length);
@@ -608,7 +931,7 @@ async function applyJob(job) {
 
     // Check connects
     if ((user.connects || 0) <= 0) {
-        showTemporaryNotification("You don’t have enough connects to apply.", "red");
+        showTemporaryNotification("You don't have enough connects to apply.", "red");
         setTimeout(() => window.location.href = "pricing.html", 4000);
         return;
     }
@@ -640,7 +963,7 @@ async function applyJob(job) {
 
         // Not enough connects (backend fallback)
         if (data.limitReached) {
-            showTemporaryNotification("You don’t have enough connects to apply.", "red");
+            showTemporaryNotification("You don't have enough connects to apply.", "red");
             setTimeout(() => window.location.href = "pricing.html", 4000);
             return;
         }
